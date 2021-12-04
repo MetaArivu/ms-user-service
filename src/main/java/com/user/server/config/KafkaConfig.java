@@ -44,11 +44,7 @@ public class KafkaConfig {
 	public KafkaTemplate<String, UserCreatedEvent> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
 	}
-	
-	@Bean
-	public Sampler defaultSampler() {
-		return Sampler.ALWAYS_SAMPLE;
-	}
+	 
 	
 	
 }
