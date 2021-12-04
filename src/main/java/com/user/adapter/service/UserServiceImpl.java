@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private void publishEvent(UserCreatedEvent event) {
-		log.debug("Publishing on topic={} data={}",KAFKA_TOPIC_USER_CREATED_EVENT,event);
+		log.info("Publishing on topic={} data={}",KAFKA_TOPIC_USER_CREATED_EVENT,event);
 		ListenableFuture<SendResult<String, UserCreatedEvent>> listenableFuture = kafkaTemplate.send(KAFKA_TOPIC_USER_CREATED_EVENT, event.getId(), event);
 		
 		listenableFuture.addCallback(new ListenableFutureCallback<SendResult<String, UserCreatedEvent>>() {

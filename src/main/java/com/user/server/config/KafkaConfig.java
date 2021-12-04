@@ -15,6 +15,8 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.user.adapter.dto.UserCreatedEvent;
 
+import brave.sampler.Sampler;
+
 @Configuration
 public class KafkaConfig {
 
@@ -42,4 +44,11 @@ public class KafkaConfig {
 	public KafkaTemplate<String, UserCreatedEvent> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
 	}
+	
+	@Bean
+	public Sampler defaultSampler() {
+		return Sampler.ALWAYS_SAMPLE;
+	}
+	
+	
 }
