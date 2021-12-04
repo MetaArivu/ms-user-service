@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.user.adapter.dto.UserCreatedEvent;
 
 @Document(value = "user_details")
@@ -98,9 +99,14 @@ public class UserDetails extends BaseEntity {
 		return id + "|" + loginId + "|" + firstName + " " + middleName + " " + lastName + "|" + email + "|" + age + "|" + dob;
 	}
 
+	@JsonIgnore
 	@Override
 	public boolean isValid() {
 		return true;
+	}
+	
+	public String token() {
+		return this.id+"|"+this.loginId;
 	}
 	
 	public UserCreatedEvent userCreatedEvent() {

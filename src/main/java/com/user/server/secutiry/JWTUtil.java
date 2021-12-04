@@ -61,15 +61,15 @@ public class JWTUtil {
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(Role.ROLE_ADMIN);
 		claims.put("role", roles); // Look Roles
-		return doGenerateToken(claims, user.getLoginId());
+		return doGenerateToken(claims, user.token());
 	}
 
-	private String doGenerateToken(Map<String, Object> claims, String username) {
+	private String doGenerateToken(Map<String, Object> claims, String tokenId) {
 		Long expirationTimeLong = appProp.getJwtExpiration();
 		final Date createdDate = new Date();
 		final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong * 1000);
 
-		return Jwts.builder().setClaims(claims).setSubject(username).setIssuedAt(createdDate)
+		return "Bearer "+Jwts.builder().setClaims(claims).setSubject(tokenId).setIssuedAt(createdDate)
 				.setExpiration(expirationDate).signWith(key).compact();
 	}
 

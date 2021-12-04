@@ -28,6 +28,7 @@ public abstract class BaseEntity {
 	@LastModifiedDate
 	protected Date updateDate;
 
+	@JsonIgnore
 	@Version
 	private Long version;
 
