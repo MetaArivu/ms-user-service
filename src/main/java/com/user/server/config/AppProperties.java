@@ -33,6 +33,9 @@ public class AppProperties {
 	@Value("${app.data.database}")
 	private String database;
 
+	@Value("${app.kafka.bootstrap-servers}")
+	private String kafkaBootstrapServer;
+
 	public String[] getPublicAPI() {
 		return this.publicAPI;
 	}
@@ -53,26 +56,24 @@ public class AppProperties {
 		return dbHost;
 	}
 
-	public void setDbHost(String dbHost) {
-		this.dbHost = dbHost;
-	}
-
 	public String getDbPort() {
 		return dbPort;
-	}
-
-	public void setDbPort(String dbPort) {
-		this.dbPort = dbPort;
 	}
 
 	public String getDatabase() {
 		return database;
 	}
 
-	public void setDatabase(String database) {
-		this.database = database;
+	public String getAppInfo() {
+		return appInfo;
 	}
-	
-	
-	
+
+	public String getAppVersion() {
+		return appVersion;
+	}
+
+	public String getKafkaBootstrapServer() {
+		return kafkaBootstrapServer;
+	}
+
 }

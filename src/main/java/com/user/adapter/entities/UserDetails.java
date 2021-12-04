@@ -5,6 +5,8 @@ import java.util.Date;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.user.adapter.dto.UserCreatedEvent;
+
 @Document(value = "user_details")
 public class UserDetails extends BaseEntity {
 
@@ -93,8 +95,7 @@ public class UserDetails extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "[loginId=" + loginId + ", firstName=" + firstName + ", middleName=" + middleName
-				+ ", lastName=" + lastName + ", email=" + email + ", age=" + age + ", dob=" + dob + "]";
+		return id + "|" + loginId + "|" + firstName + " " + middleName + " " + lastName + "|" + email + "|" + age + "|" + dob;
 	}
 
 	@Override
@@ -102,5 +103,18 @@ public class UserDetails extends BaseEntity {
 		return true;
 	}
 	
-	
+	public UserCreatedEvent userCreatedEvent() {
+		return new UserCreatedEvent.Builder()
+				.age(age)
+				.dob(dob)
+				.email(email)
+				.firstName(firstName)
+				.id(getId())
+				.lastName(lastName)
+				.loginId(loginId)
+				.middleName(middleName)
+				.password(password)
+				.build();
+	}
+
 }
