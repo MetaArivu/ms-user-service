@@ -1,5 +1,11 @@
 # User Micro Service
 
+## BUILD & Run Locally
+- mvn clean install
+- mvn spring-boot:run 
+  - This will start server on port 6061
+
+
 ## API
 
 - Welcome API
