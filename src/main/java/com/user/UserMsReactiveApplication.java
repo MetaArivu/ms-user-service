@@ -14,16 +14,13 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 
 @OpenAPIDefinition(info = @Info(title = "APIs", version = "1.0", description = "User Service Documentation APIs v1.0"))
-@SpringBootApplication(exclude = {
-		  MongoAutoConfiguration.class, 
-		  MongoDataAutoConfiguration.class
-		})	
+@SpringBootApplication(exclude = { MongoAutoConfiguration.class, MongoDataAutoConfiguration.class })
 
 @EnableReactiveMongoAuditing
 public class UserMsReactiveApplication {
 
 	public static void main(String[] args) {
-	    System.setProperty("spring.webflux.base-path", APPConstant.CONTEXT_PATH);
+		System.setProperty("spring.webflux.base-path", APPConstant.CONTEXT_PATH);
 		SpringApplication.run(UserMsReactiveApplication.class, args);
 	}
 
@@ -31,7 +28,7 @@ public class UserMsReactiveApplication {
 	public void onRefresh() {
 		System.out.println("environment Changed..");
 	}
-	
+
 	@Bean
 	public Sampler defaultSampler() {
 		return Sampler.ALWAYS_SAMPLE;
