@@ -33,6 +33,11 @@
     "password":"password"
 }'
 
+- Login User Info 
+  - Send Token Which is received after Authentication
+  - curl --location --request GET 'http://localhost:6061/user-service/api/v1/login/userinfo' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjpbIlJPTEVfQURNSU4iXSwic3ViIjoiNjFhZTAxODk5NTNlYTI2MTdlNWRlZGIxfGtldGFuLmdvdGVAZ21haWwuY29tIiwiaWF0IjoxNjM4OTM5Mzc1LCJleHAiOjE2Mzg5NjgxNzV9.PwDbz1R6bfhYSytaZNLnzdmIe_bI6cg4QtQf4RTK2FBAK4QBuQqpJj2mddIpm0Nw-L47NEXxwiwnBOT546j2Jg'
+
 - List All Users
   - Send Token Which is received after Authentication
   - curl --location --request GET 'http://localhost:6061/user-service/api/v1/' \
