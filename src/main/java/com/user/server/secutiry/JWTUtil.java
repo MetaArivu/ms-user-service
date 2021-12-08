@@ -82,7 +82,13 @@ public class JWTUtil {
 		} catch (ExpiredJwtException ex) {
 			return false;
 		}
-
+	}
+	
+	public String getUserIdFromToken(String _token) {
+		_token = _token.substring(7);
+		String token = this.getUsernameFromToken(_token);
+		String split[] = token.split("\\|");
+		return split[0];
 	}
 
 }

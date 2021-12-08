@@ -18,4 +18,8 @@ public interface UserService {
 	public Mono<UserDetails> update(String id, UserDetails _user);
 	
 	public Mono<AuthResponse> login(AuthRequest authReq);
+	
+	public Mono<UserDetails> loginUserInfo();
+
+	
 }

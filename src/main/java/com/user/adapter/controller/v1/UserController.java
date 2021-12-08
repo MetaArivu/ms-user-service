@@ -36,6 +36,7 @@ public class UserController {
 	@Autowired
 	private UserService userSvc;
 
+	
 	@PostMapping(value = "/login")
 	public Mono<ResponseEntity<Response<AuthResponse>>> login(@RequestBody AuthRequest authReq) {
 
@@ -85,6 +86,18 @@ public class UserController {
 	public Mono<ResponseEntity<Response<UserDetails>>> userById(@PathVariable("id") String id) {
 
 		return userSvc.findById(id)
+				.map(user -> new ResponseEntity<Response<UserDetails>>(
+						new Response<UserDetails>(true, "Record retrieved successully", user), HttpStatus.OK))
+				.defaultIfEmpty(new ResponseEntity<Response<UserDetails>>(
+						new Response<UserDetails>(false, "Record not found"), HttpStatus.NOT_FOUND));
+
+	}
+	
+	@GetMapping(value = "/login/userinfo")
+	public Mono<ResponseEntity<Response<UserDetails>>> loginUserInfo() {
+
+		
+		return userSvc.loginUserInfo()
 				.map(user -> new ResponseEntity<Response<UserDetails>>(
 						new Response<UserDetails>(true, "Record retrieved successully", user), HttpStatus.OK))
 				.defaultIfEmpty(new ResponseEntity<Response<UserDetails>>(

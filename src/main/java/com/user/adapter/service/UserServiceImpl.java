@@ -4,6 +4,7 @@ import static com.user.APPConstant.KAFKA_TOPIC_USER_CREATED_EVENT;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -47,6 +48,14 @@ public class UserServiceImpl implements UserService {
 			String token = jtwUtil.generateToken(user);
 			return new AuthResponse(token);
 		});
+	}
+	
+	@Override
+	public Mono<UserDetails> loginUserInfo() {
+		String token = MDC.get("Authorization");
+		String userId = jtwUtil.getUserIdFromToken(token);
+		log.info("Fetch Login User Info for ID={}",userId);
+		return this.findById(userId);
 	}
 
 	@Override
