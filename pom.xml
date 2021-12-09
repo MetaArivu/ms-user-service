@@ -124,7 +124,7 @@
 				<version>1.0.0</version>
 
 				<configuration>
-					<imageName>metamagic/${project.artifactId}:${project.version}</imageName>
+					<imageName>metamagic/msk8-${project.artifactId}:${project.version}</imageName>
 					<dockerDirectory>Docker</dockerDirectory>
 					<resources>
 						<resource>

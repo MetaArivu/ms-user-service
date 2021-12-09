@@ -4,13 +4,15 @@
 - mvn clean install
 - mvn spring-boot:run 
 
-## Build & RUN Docker Image
+## Buil, RUN Locally and Push Docker Image
 - Build Docker Image
   - mvn package docker:build 
 - List Docker Images
   - docker images
 - Run Docker With Specific Spring Profile ( Note: We are setting which profile should be used and injecting that as enviornment Variable )
   - docker run -p 6061:6061 -e "SPRING_PROFILES_ACTIVE=prod" metamagic/user-service:1.0
+- Push Docker Image to Docker Hub
+  - docker image push metamagic/msk8-user-service:1.0
 
 
 ## API
