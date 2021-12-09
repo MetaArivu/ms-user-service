@@ -31,4 +31,4 @@ RUN chmod -R 750 /Softwares/service/*
 EXPOSE 6061
 
 # Start Microservice
-ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","/Softwares/service/user-service-1.0.jar"]
+ENTRYPOINT ["java","-jar","/Softwares/service/user-service-1.0.jar"]
