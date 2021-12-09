@@ -12,7 +12,7 @@
 # Base Version
 FROM metamagic/java:8
 
-LABEL author="Araf Karsh Hamid <araf.karsh@metamagic.in>"
+LABEL author="Ketan Gote <ketan.gote@metamagic.in>"
 
 RUN mkdir /Softwares/service
 RUN mkdir /Softwares/service/libs
@@ -20,10 +20,8 @@ RUN mkdir /home/arivu/libs
 
 ARG SPRINGBOOT_JAR=user-service-1.0.jar
 
-
 # SpringBoot Fat Jar
 COPY --chown=arivu:arivu ${SPRINGBOOT_JAR} /Softwares/service/
-
 
 
 # Change the Mode
@@ -33,4 +31,4 @@ RUN chmod -R 750 /Softwares/service/*
 EXPOSE 6061
 
 # Start Microservice
-ENTRYPOINT ["java","-jar","/Softwares/service/user-service-1.0.jar"]
+ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","/Softwares/service/user-service-1.0.jar"]
