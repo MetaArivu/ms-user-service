@@ -3,14 +3,13 @@
 ## BUILD & Run Locally
 - mvn clean install
 - mvn spring-boot:run 
-  - This will start server on port 6061
 
 ## Build & RUN Docker Image
-- mvn package docker:build 
-  - This will Build Docker Image
-- docker images
-  - This will list Docker Images
-- Run Docker With Specific Spring Profile ( This Will Go as Env)
+- Build Docker Image
+  - mvn package docker:build 
+- List Docker Images
+  - docker images
+- Run Docker With Specific Spring Profile ( Note: We are setting which profile should be used and injecting that as enviornment Variable )
   - docker run -p 6061:6061 -e "SPRING_PROFILES_ACTIVE=prod" metamagic/user-service:1.0
 
 
