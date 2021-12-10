@@ -119,22 +119,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private void publishEvent(UserCreatedEvent event) {
-		log.info("Publishing on topic={} data={}",KAFKA_TOPIC_USER_CREATED_EVENT,event);
-		ListenableFuture<SendResult<String, UserCreatedEvent>> listenableFuture = kafkaTemplate.send(KAFKA_TOPIC_USER_CREATED_EVENT, event.getId(), event);
+		try {
+			log.info("Publishing on topic={} data={}",KAFKA_TOPIC_USER_CREATED_EVENT,event);
+			ListenableFuture<SendResult<String, UserCreatedEvent>> listenableFuture = kafkaTemplate.send(KAFKA_TOPIC_USER_CREATED_EVENT, event.getId(), event);
+			
+			listenableFuture.addCallback(new ListenableFutureCallback<SendResult<String, UserCreatedEvent>>() {
+
+				@Override
+				public void onSuccess(SendResult<String, UserCreatedEvent> result) {
+					log.info("Ack Received, Message published successfully on topic={}, key={}",KAFKA_TOPIC_USER_CREATED_EVENT, result.getProducerRecord().key());
+
+				}
+
+				@Override
+				public void onFailure(Throwable ex) {
+					log.error("Message cannot be published Exception={}, Event={}, Topic={}", ex.getMessage(), event, KAFKA_TOPIC_USER_CREATED_EVENT);
+					log.error("Exception=",ex);
+				}
+			});;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		listenableFuture.addCallback(new ListenableFutureCallback<SendResult<String, UserCreatedEvent>>() {
-
-			@Override
-			public void onSuccess(SendResult<String, UserCreatedEvent> result) {
-				log.info("Ack Received, Message published successfully on topic={}, key={}",KAFKA_TOPIC_USER_CREATED_EVENT, result.getProducerRecord().key());
-
-			}
-
-			@Override
-			public void onFailure(Throwable ex) {
-				log.error("Message cannot be published Exception={}, Event={}, Topic={}", ex.getMessage(), event, KAFKA_TOPIC_USER_CREATED_EVENT);
-				log.error("Exception=",ex);
-			}
-		});;
 	}
 }
