@@ -1,5 +1,7 @@
 package com.user.server.secutiry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -17,6 +19,8 @@ import reactor.core.publisher.Mono;
 @EnableReactiveMethodSecurity
 public class WebSecurityConfig {
 
+	private static final Logger log = (Logger) LoggerFactory.getLogger(WebSecurityConfig.class);
+
 	@Autowired
     private AuthenticationManager authenticationManager;
     
@@ -30,6 +34,8 @@ public class WebSecurityConfig {
 	private AppProperties appProp;
     @Bean
     public SecurityWebFilterChain securitygWebFilterChain(ServerHttpSecurity http) {
+    	log.info("Authenticating Request URL={}",http);
+    	log.info("Public URLS={}",appProp.getPublicAPI().toString());
         return http
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)

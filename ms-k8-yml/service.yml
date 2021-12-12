@@ -7,8 +7,9 @@ metadata:
     app: user-svc
 spec:
   selector:
-    app: user-service
-  type: LoadBalancer
+    app: user-svc
+  type: ClusterIP
   ports:
    - port: 80
      targetPort: 8080
+     name: http

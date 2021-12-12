@@ -20,13 +20,13 @@ import io.swagger.v3.oas.annotations.info.Info;
 public class UserMsReactiveApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("spring.webflux.base-path", APPConstant.CONTEXT_PATH);
+		//System.setProperty("spring.webflux.base-path", APPConstant.CONTEXT_PATH);
 		SpringApplication.run(UserMsReactiveApplication.class, args);
 	}
 
 	@EventListener({ EnvironmentChangeEvent.class })
 	public void onRefresh() {
-		System.out.println("environment Changed..");
+		System.out.println("Environment Changed..");
 	}
 
 	@Bean

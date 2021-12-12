@@ -1,5 +1,8 @@
 package com.user.server.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 
@@ -16,7 +19,7 @@ public class AppProperties {
 	private String appVersion;
 
 	@Value("${app.public_routes}")
-	private String[] publicAPI;
+	private String publicAPI;
 
 	@Value("${jwt.secret}")
 	private String jwtSecret;
@@ -37,7 +40,13 @@ public class AppProperties {
 	private String kafkaBootstrapServer;
 
 	public String[] getPublicAPI() {
-		return this.publicAPI;
+		List<String> apis = new ArrayList<String>();
+		String split [] = this.publicAPI.split(",");
+		for (int i = 0; i < split.length; i++) {
+			apis.add(split[i]);
+		}
+		System.out.println("*******apis****"+apis);
+		return apis.toArray(split);
 	}
 
 	public String getJwtSecret() {

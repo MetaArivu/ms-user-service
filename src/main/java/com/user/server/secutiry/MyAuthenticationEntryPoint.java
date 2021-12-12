@@ -25,7 +25,8 @@ public class MyAuthenticationEntryPoint implements ServerAuthenticationEntryPoin
 
 	@Override
 	public Mono<Void> commence(ServerWebExchange exchange, AuthenticationException ex) {
-		log.error("Invalid Token, AuthenticationException="+ex.getMessage());
+		
+		log.error("URL={}, Invalid Token, AuthenticationException=",exchange.getRequest().getURI().getPath(), ex.getMessage());
 		exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
 		exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
         DataBuffer db = null;
