@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.user.server.config.AppProperties;
 
 @RestController
-//@RequestMapping("/")
 @RequestMapping(CONTEXT_PATH)
-
 public class AppInfoController {
 
 	@Autowired
@@ -24,5 +22,15 @@ public class AppInfoController {
 	public ResponseEntity<String> welcomePage() {
 		return new ResponseEntity<String>(appProp.appInfo(), HttpStatus.OK);
 	}
-	 
+
+	@GetMapping("/live")
+	public ResponseEntity<String> live() {
+		return new ResponseEntity<String>(appProp.appInfo(), HttpStatus.OK);
+	}
+
+	@GetMapping("/ready")
+	public ResponseEntity<String> ready() {
+		return new ResponseEntity<String>(appProp.appInfo(), HttpStatus.OK);
+	}
+
 }
