@@ -24,6 +24,7 @@ import com.user.adapter.dto.Response;
 import com.user.adapter.entities.UserDetails;
 import com.user.domainlayer.service.UserService;
 
+import io.micrometer.core.annotation.Timed;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -38,6 +39,7 @@ public class UserController {
 
 	
 	@PostMapping(value = "/login")
+	@Timed(value = "login", description = "Time taken for authenticating wser")
 	public Mono<ResponseEntity<Response<AuthResponse>>> login(@RequestBody AuthRequest authReq) {
 
 		return userSvc.login(authReq).map(user -> {
@@ -49,6 +51,7 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/register")
+	@Timed(value = "register", description = "Time taken for register new user")
 	public Mono<ResponseEntity<Response<UserDetails>>> save(@RequestBody UserDetails _user) {
 
 		return userSvc.save(_user).map(user -> {
@@ -60,6 +63,7 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/update/{id}")
+	@Timed(value = "update", description = "Time taken for update user")
 	public Mono<ResponseEntity<Response<UserDetails>>> update(@PathVariable("id") String id,
 			@RequestBody UserDetails _user) {
 
@@ -72,6 +76,7 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/")
+	@Timed(value = "allUsers", description = "Time taken for fetch all user")
 	public Mono<ResponseEntity<Response<List<UserDetails>>>> allUsers() {
 
 		return userSvc.allUsers().collectList()
@@ -83,6 +88,7 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/{id}")
+	@Timed(value = "userById", description = "Time taken for fetch specific user")
 	public Mono<ResponseEntity<Response<UserDetails>>> userById(@PathVariable("id") String id) {
 
 		return userSvc.findById(id)
@@ -94,6 +100,7 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/login/userinfo")
+	@Timed(value = "loginUserInfo", description = "Time taken for fetch login user info")
 	public Mono<ResponseEntity<Response<UserDetails>>> loginUserInfo() {
 
 		

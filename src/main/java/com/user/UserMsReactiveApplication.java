@@ -10,6 +10,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.data.mongodb.config.EnableReactiveMongoAuditing;
 
 import brave.sampler.Sampler;
+import io.micrometer.core.aop.TimedAspect;
+import io.micrometer.core.instrument.MeterRegistry;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 
@@ -33,20 +35,10 @@ public class UserMsReactiveApplication {
 	public Sampler defaultSampler() {
 		return Sampler.ALWAYS_SAMPLE;
 	}
-//	
-//	@Bean
-//    public MongoClient mongo() {
-//        ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/userdb");
-//        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
-//          .applyConnectionString(connectionString)
-//          .build();
-//        
-//        return MongoClients.create(mongoClientSettings);
-//    }
-//
-//    @Bean
-//    public ReactiveMongoTemplate mongoTemplate() throws Exception {
-//        return new ReactiveMongoTemplate(this.mongo(), "userdb");
-//    }
+
+	@Bean
+	public TimedAspect timeAspect(MeterRegistry meterRegistry) {
+		return new TimedAspect(meterRegistry);
+	}
 
 }

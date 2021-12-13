@@ -34,8 +34,8 @@ public class WebSecurityConfig {
 	private AppProperties appProp;
     @Bean
     public SecurityWebFilterChain securitygWebFilterChain(ServerHttpSecurity http) {
-    	log.info("Authenticating Request URL={}",http);
-    	log.info("Public URLS={}",appProp.getPublicAPI().toString());
+    	//log.info("Authenticating Request URL={}",http);
+    	//log.info("Public URLS={}",appProp.getPublicAPI().toString());
         return http
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
