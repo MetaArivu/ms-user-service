@@ -28,7 +28,7 @@ COPY --chown=arivu:arivu ${SPRINGBOOT_JAR} /Softwares/service/
 RUN chmod -R 750 /Softwares/service/*
 
 # Expose Microservice Port
-EXPOSE 6061
+EXPOSE 8080
 
 # Start Microservice
 ENTRYPOINT ["java","-jar","/Softwares/service/user-service-1.0.jar"]
