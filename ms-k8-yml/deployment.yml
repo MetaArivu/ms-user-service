@@ -1,32 +1,49 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: user-svc-pod
+  name: ms-user-deploy
   namespace: shoppingportal
-  labels:
-    app: user-svc
-    zone: prod
-    version: v1
 spec:
-  containers:
-  - name: user-svc-cntr
-    image: metamagic/msk8-user-service:1.0
-    imagePullPolicy: Always
-    ports:
-     - containerPort: 8080
-    livenessProbe:
-        httpGet:
-          path: /user-svc/live
-          port: 8080
-        initialDelaySeconds: 15
-        periodSeconds: 15
-    readinessProbe:
-        httpGet:
-          path: /user-svc/ready
-          port: 8080
-        initialDelaySeconds: 15
-        periodSeconds: 15
-    
-    env:
+  replicas: 1
+  selector:
+    matchLabels:
+      zone: prod
+      app: user-svc
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        name: user-svc
+        version: v1
+        release: stable
+        tier: fe
+        zone: prod
+        managed-by: m2
+        app: user-svc
+    spec:
+      containers:
+        - name: ms-user-deploy-ctr
+          image: metamagic/ms-user-service:1.0 
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /user-svc/live
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          readinessProbe:
+             httpGet:
+               path: /user-svc/ready
+               port: 8080
+             initialDelaySeconds: 15
+             periodSeconds: 15              
+          env:
           - name: SPRING_PROFILES_ACTIVE
-            value: "prod"
+            value: "prod"        
