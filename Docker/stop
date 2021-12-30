@@ -5,7 +5,7 @@
 # Stop Container
 # -------------------------------------------------------------------------------------------
 ORG=`../getServiceName 1`
-SERVICE=`../getServiceName 4`
+SERVICE=`../getServiceName 2`
 echo "docker container stop $SERVICE"
 docker container stop $SERVICE
 mv $SERVICE.cid $SERVICE.cid.old
