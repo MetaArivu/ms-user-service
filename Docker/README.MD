@@ -2,10 +2,11 @@
 
 ## Step 1 - Verify Container Name and Org Name
 
-1. Verify the Org Name in src/main/resources/app.props.tmpl file (service.org)
-2. Verify the container name in src/main/resources/app.props.tmpl file (service.container)
-3. Verify the microservice name in src/main/resources/app.props.tmpl file (service.api.name)
+1. Verify the Org Name in src/main/resources/application.properties file (service.org)
+2. Verify the container name in src/main/resources/application.properties file (service.container)
+3. Verify the microservice name in src/main/resources/application.properties file (service.api.name)
 
+4. verify base path in getServiceName file (SRC_BASE)
 ## Step 2 - Build the image
 
 1. build (Build the Container)
